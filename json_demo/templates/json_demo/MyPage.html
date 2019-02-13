@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Page 1
+{% endblock %}
+
+{% block content %}
+
+    <p>Directly after the page is loaded, a javascript script places a JSON encoded array in the input below:</p>
+    {# you can change the type to 'hidden' to hide the field #}
+    <input type="text" name="array_from_javascript" id="id_array_from_javascript">
+
+    <p>If you click next, it is written to python, modified there (replace 'a' with 'd'), and then shown on the next page.</p>
+
+    {% next_button %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        var long_array = ["a", "b", "c", 1, 2, 3];
+
+        // once the page is loaded, just dump the array in the input field as a string:
+        $('#id_array_from_javascript').val(JSON.stringify(long_array));
+
+    </script>
+{% endblock %}

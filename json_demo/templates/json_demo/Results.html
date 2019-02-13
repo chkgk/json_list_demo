@@ -1,0 +1,26 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Page 2
+{% endblock %}
+
+{% block content %}
+
+    <p>After being modified in python, the array looks like this (it is still encoded as a JSON string):</p>
+    <p>{{ player.array_from_javascript }}</p>
+
+    <p>Take a look in the console (F12) and the source code see that it is also available as a standard JS array and each element can be accessed as usual.</p>
+
+    {% next_button %}
+{% endblock %}
+
+
+{% block scripts %}
+    <script type="text/javascript">
+        var string_from_python = {{ player.array_from_javascript|json }};
+        var recreated_array = JSON.parse(string_from_python);
+
+        console.log('The first array element is:', recreated_array[0]);
+    </script>
+{% endblock %}
